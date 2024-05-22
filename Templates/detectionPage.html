@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Eye Disease Detection</title>
+    <style>
+        .box {
+            width: 50%;
+            margin: 0 auto;
+            text-align: center;
+            border: 1px solid #ccc;
+            padding: 20px;
+        }
+        input[type="text"],
+        input[type="number"] {
+            width: 80%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        input[type="submit"] {
+            width: 40%;
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+        .contact-info {
+            margin-top: 30px;
+            text-align: left;
+        }
+        .contact-info h2 {
+            color: #333;
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+        .contact-info input[type="text"],
+        .contact-info input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styleDP.css') }}">
+</head>
+<body>
+    <div class="box">
+        <h1>EYE DISEASE DETECTION</h1>
+        <p> Upload Retinal Scan Images Below</p>
+        <form action="/result" method="post" enctype="multipart/form-data">
+            <input type="file" name="image"> <br>
+            <input type="submit" value="Run Test">
+        </form>
+        {% if result %}
+            <br>
+            <img src="/static/css/img/result.jpg" alt="Detected image">
+            <h2>Result: {{ result }}</h2>
+            <div class="contact-info">
+                <h2>Contact Information</h2>
+                <form action="/contact" method="post">
+                    <input type="text" name="name" placeholder="Name"> <br>
+                    <input type="number" name="number" placeholder="Phone No."> <br>
+                    <input type="number" name="age" placeholder="Age"> <br>
+                    <input type="email" name="email" placeholder="E-Mail"> <br>
+                    <input type="submit" value="Submit">
+                </form>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
